@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, user-scalable=no">
+<title>M2 Robot Remote Control</title>
+<!-- jQuery UI -->
+<link rel="stylesheet" href="js/jquery-ui.css">
+<script src="js/jquery-1.11.0.min.js"></script>
+<script src="js/jquery-ui.min.js"></script>
+<script src="js/jquery.ui.touch-punch.min.js"></script>
+
+<!-- WebIOPi -->
+<script src="js/require.js"></script>
+<script>
+require(["/webiopi.js", "javascript.js"], function(){
+    webiopi().ready( initialize_webiopi );
+});
+</script>
+</head>
+<body>
+<div id="touchArea">
+    <canvas id="canvas"></canvas>
+</div>
+
+<p>Action</p>
+<div align="center">
+<button id="Shutter" onClick="ActionShutter()">Shutter</button>
+</div>
+
+
+</body>
+</html>

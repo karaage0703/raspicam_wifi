@@ -1,0 +1,42 @@
+#touchArea{
+    width: 100%;
+//    height: auto;
+    height: 100%;
+}
+
+#slider_servo{
+    display: inline-block;
+}
+
+.ui-slider .ui-slider-handle {
+    width: 30px;
+    height: 30px;
+}
+
+button {
+    width: auto;
+    height: auto;
+    background: #003366;
+    font-weight: normal;
+    font-size: 14pt;
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 14px;
+    color: #ffffff;
+    padding: 10px 20px;
+    -moz-border-radius: 10px;
+    -webkit-border-radius: 10px;
+    border-radius: 10px;
+    border: 1px solid #003366;
+    -moz-box-shadow:
+        0px 1px 3px rgba(000,000,000,0.5),
+        inset 0px 0px 1px rgba(255,255,255,0.5);
+    -webkit-box-shadow:
+        0px 1px 3px rgba(000,000,000,0.5),
+        inset 0px 0px 1px rgba(255,255,255,0.5);
+    box-shadow:
+        0px 1px 3px rgba(000,000,000,0.5),
+        inset 0px 0px 1px rgba(255,255,255,0.5);
+    text-shadow:
+        0px -1px 0px rgba(000,000,000,0.7),
+        0px 1px 0px rgba(255,255,255,0.3);
+}
