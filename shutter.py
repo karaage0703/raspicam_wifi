@@ -5,7 +5,8 @@ import os
 from time import sleep
 
 shutter_numb = 0
-home_dir = '/home/pi/photo'
+#home_dir = '/home/pi/photo'
+home_dir = '/usr/share/webiopi/htdocs/rpicam/photo'
 
 cmd ="sudo killall mjpg_streamer"
 subprocess.call(cmd, shell=True)
