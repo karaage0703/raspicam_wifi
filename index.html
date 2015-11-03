@@ -19,13 +19,14 @@ require(["/webiopi.js", "javascript.js"], function(){
 </script>
 </head>
 <body>
-<div id="touchArea">
+<div id="touchArea" align="center">
     <canvas id="canvas"></canvas>
 </div>
 
-<p>Action</p>
 <div align="center">
+<button id="Preview" onClick="ActionPreview()">Preview</button>
 <button id="Shutter" onClick="ActionShutter()">Shutter</button>
+<button id="Shutd" onClick="ActionShutdown()">Shutdown</button>
 </div>
 
 

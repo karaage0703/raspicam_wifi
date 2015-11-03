@@ -19,23 +19,6 @@ function initialize_webiopi(){
     imageSetup();
 }
 
-// スライダの最小値、最大値、刻み幅、初期値
-var sliderMin = 0;
-var sliderMax = 20;
-var sliderStep = 1;
-var sliderValue = sliderMax/2;
-
-// 前に送信したデューティー比を覚えておく
-var rate25Prev = 0;
-var rate24Prev = 0;
-var rate23Prev = 0;
-var rate22Prev = 0;
-
-// デューティー比がth (0.0～1.0) 以上変化した時のみ値を送信
-var th = 0.1;
-// モーターの最大速度 (0.0～1.0)。モーターを保護する意味で1.0にはしない方が良い
-var maxSpeed = 0.8;
-// 命令送信ごとに増加するIDを作成（iOSのSafariでPOSTがキャッシュされることの対策）
 var commandID = 0;
 
 var mCount = 0;
@@ -94,7 +77,9 @@ function imageSetup(){
 
 function touchEvent(e){
     e.preventDefault();
+		ActionShutter();
 
+		/*
     var touch = e.touches[0];  
     var width = viewScale*document.getElementById("touchArea").offsetWidth;
     var height = width*3/4;
@@ -161,23 +146,19 @@ function touchEvent(e){
             rate22Prev = rate;
         }
     }
-
+		*/
 }
 
 // タッチ終了時のイベントリスナー
 function touchEndEvent(e){
     e.preventDefault();
 
-    webiopi().callMacro("pwm4Write", [0, 0, 0, 0, commandID++]);
-    rate25Prev = 0;
-    rate24Prev = 0;
-    rate23Prev = 0;
-    rate22Prev = 0;
 }
 
 // クリック時のイベントリスナー（主にPC用）
 function clickEvent(e){
-
+		ActionShutter();
+		/*
     var width = viewScale*document.getElementById("touchArea").offsetWidth;
     var height = width*3/4;
 
@@ -237,30 +218,9 @@ function clickEvent(e){
         rate23Prev = 0;
         rate22Prev = rate;
     }
+		*/
 
 }
-
-// jQuery UIによるスライダの設定
-$(function() {
-    // スライダを動かしたときに呼ばれるイベントハンドラの設定
-    var sliderHandler = function(e, ui){
-        var ratio = ui.value/sliderMax;
-        // サーボの回転の向きを逆にしたい場合次の行を無効に
-        ratio = 1.0 - ratio;
-        webiopi().callMacro("setHwPWM", [ratio, commandID++]);
-    };
-
-    // スライダへ設定を適用
-    $( "#slider_servo" ).slider({
-        orientation: "vertical",
-        min: sliderMin,
-        max: sliderMax,
-        step: sliderStep,
-        value: sliderValue,
-        change: sliderHandler,
-        slide: sliderHandler
-    });
-});
 
 function applyCustomCss(custom_css){
     var head = document.getElementsByTagName('head')[0];
@@ -272,14 +232,13 @@ function applyCustomCss(custom_css){
 }
 
 
-function ActionHello(){
-    webiopi().callMacro("sayHello", [0]);
+function ActionPreview(){
 }
 
 function ActionShutter(){
     webiopi().callMacro("shutterCamera", [0]);
 }
 
-function ActionSing(){
-    webiopi().callMacro("singSong", [0]);
+function ActionShutdown(){
+    webiopi().callMacro("shutdownCamera", [0]);
 }
