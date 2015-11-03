@@ -34,8 +34,12 @@ def destroy():
 @webiopi.macro
 def shutterCamera(tmp):
     cmd ="python3 /usr/share/webiopi/htdocs/rpicam/shutter.py"
+#    cmd ="python3 ./shutter.py"
     subprocess.call(cmd, shell=True)
 
-    #cmd ="tw 写真撮れたよ〜 --file=/home/pi/photo/capture.jpg --yes"
-    #subprocess.call(cmd, shell=True)
+@webiopi.macro
+def shutdownCamera(tmp):
+    cmd ="/sbin/shutdown -h now"
+#    cmd ="python3 ./shutdown.py"
+    subprocess.call(cmd, shell=True)
 
