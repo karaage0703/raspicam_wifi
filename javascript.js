@@ -34,6 +34,9 @@ var viewScale = 0.90;
 
 var URL1, URL2;
 
+var cameraMode = 0; //0:auto 1:preview 2:manual
+
+
 function imageSetup(){
 
   var host = location.host;
@@ -233,10 +236,16 @@ function applyCustomCss(custom_css){
 
 
 function ActionPreview(){
+		cameraMode++;
+		if(cameraMode > 2){
+			cameraMode = 0;
+		}
 }
 
 function ActionShutter(){
     webiopi().callMacro("shutterCamera", [0]);
+
+		setTimeout("imageSetup()", 5000);
 }
 
 function ActionShutdown(){
