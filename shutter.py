@@ -26,24 +26,25 @@ def cameraSave():
     fp.write(str(shutter_numb))
     fp.close()
 
+def shutter():
+    global shutter_numb
+    shutter_numb +=1
+    cameraSave()
+
+    filename = os.path.join(home_dir, str("{0:06d}".format(shutter_numb)) + '.jpg')
+    photofile = open(filename, 'wb')
+    print(photofile)
+
+    with picamera.PiCamera() as camera:
+        camera.resolution = (2592,1944)
+        camera.start_preview()
+        sleep(1.000)
+        camera.capture(photofile)
+
+    photofile.close()
+
 cameraLoad()
+shutter()
 
-shutter_numb +=1
-cameraSave()
-
-filename = os.path.join(home_dir, str(shutter_numb) + '.jpg')
-photofile = open(filename, 'wb')
-print(photofile)
-
-with picamera.PiCamera() as camera:
-    camera.resolution = (2592,1944)
-    camera.start_preview()
-    sleep(1.000)
-    camera.capture(photofile)
-
-photofile.close()
-
-#cmd ="tw 写真撮れたよ〜 --file=capture_2.jpg --yes"
-#subprocess.call(cmd, shell=True)
 cmd ="stream.sh"
 subprocess.call(cmd, shell=True)
