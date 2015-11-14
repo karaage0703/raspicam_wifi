@@ -10,24 +10,24 @@ import subprocess
 import picamera
 
 # camera setting
-shutter_numb = 0
-home_dir = '/home/pi/photo'
+#shutter_numb = 0
+#home_dir = '/home/pi/photo'
 
-# デバッグ出力を有効に
+# Enable webiopi debug output
 webiopi.setDebug()
 
-# GPIOライブラリの取得
+# Get GPIO library
 GPIO = webiopi.GPIO
 
-# WebIOPiの起動時に呼ばれる関数
+# Function is called when WebIOPi start up
 def setup():
     webiopi.debug("Script with macros - Setup")
 
-# WebIOPiにより繰り返される関数
+# Loop function by WebIOPi
 def loop():
     webiopi.sleep(5)        
 
-# WebIOPi終了時に呼ばれる関数
+# Function when WebIOPi is finished
 def destroy():
     webiopi.debug("Script with macros - Destroy")
 
@@ -38,8 +38,8 @@ def shutterCamera(tmp):
 
 @webiopi.macro
 def shutdownCamera(tmp):
-    cmd ="sudo /bin/systemctl stop webiopi.service"
-    subprocess.call(cmd, shell=True)
+#    cmd ="sudo /bin/systemctl stop webiopi.service"
+#    subprocess.call(cmd, shell=True)
     cmd ="/sbin/shutdown -h now"
     subprocess.call(cmd, shell=True)
 
