@@ -193,15 +193,15 @@ function ChangeMode(){
 		if(cameraMode > 2){
 				cameraMode = 0;
 		}
+
+		getData('./photo/camera.set').then(function(data) {
+				photoNumb = data - 1;
+		});
 }
 
 function ActionShutter(){
     webiopi().callMacro("shutterCamera", [0]);
 
-		getData('./photo/camera.set').then(function(data) {
-				photoNumb = data;
-		});
-	
 		setTimeout("imageSetup()", 5000);
 }
 
