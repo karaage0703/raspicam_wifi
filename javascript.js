@@ -25,7 +25,9 @@ var mCanvas;
 var mCtx;
 var mImg1;
 var mImg2;
+var mImgShutter;
 var mImgArrow;
+
 var mWidth = 640;
 var mHeight = 480;
 
@@ -47,8 +49,10 @@ function imageSetup(){
 		var port_mjpeg = 9000;
 		var port_webiopi = 8000;
 		URL_MJPEG = 'http://' + hostname + ':' + port_mjpeg + '/?action=snapshot';
-		//  URL2 = 'http://' + hostname + ':8000/m2/img/CrawlerControllerTrans.png';
+		URL_SHUTTER = 'http://' + hostname + ':' + port_webiopi + '/rpicam/img/shutter.png';
 		URL_PREVIEW = 'http://' + hostname + ':' + port_webiopi + '/rpicam/photo/';
+		URL_ARROW = 'http://' + hostname + ':' + port_webiopi + '/rpicam/img/arrow.png';
+
 
 		mCanvas = document.getElementById("canvas");
 		mCtx = mCanvas.getContext('2d');
@@ -61,21 +65,24 @@ function imageSetup(){
 
 		mImg1 = new Image();
 		mImg2 = new Image();
-		mImgPreview = new Image();
+		mImgShutter = new Image();
+		mImgArrow = new Image();
 
 		mImg1.src = URL_MJPEG +'&'+(mCount++);
 
-		//  mImgArrow.src = URL2;
+		mImgShutter.src = URL_SHUTTER;
+		mImgArrow.src = URL_ARROW;
 
 		mImg1.onload = function() {
 				if(cameraMode == 0 || cameraMode == 2){
 						mImg2.src = URL_MJPEG + '&' + (mCount++);
 						mCtx.drawImage(mImg1, 0, 0, mWidth, mHeight);
-						//					mCtx.drawImage(mImgArrow, 0, 0, mWidth, mHeight);
+						mCtx.drawImage(mImgShutter, 0, 0, mWidth, mHeight);
 				}
 				if(cameraMode == 1){
 						mImg2.src = URL_PREVIEW + getZeroDigit(photoNumb, 6) + ".jpg";
 						mCtx.drawImage(mImg1, 0, 0, mWidth, mHeight);
+						mCtx.drawImage(mImgArrow, 0, 0, mWidth, mHeight);
 				}
 		};
 
@@ -83,12 +90,13 @@ function imageSetup(){
 				if(cameraMode == 0 || cameraMode == 2){
 						mImg1.src =URL_MJPEG + '&' + (mCount++);
 						mCtx.drawImage(mImg2, 0, 0, mWidth, mHeight);
-						//					mCtx.drawImage(mImgArrow, 0, 0, mWidth, mHeight);
+						mCtx.drawImage(mImgShutter, 0, 0, mWidth, mHeight);
 				}
 
 				if(cameraMode == 1){
 						mImg1.src = URL_PREVIEW + getZeroDigit(photoNumb, 6) + ".jpg";
 						mCtx.drawImage(mImg2, 0, 0, mWidth, mHeight);
+						mCtx.drawImage(mImgArrow, 0, 0, mWidth, mHeight);
 				}
 		};
 }
