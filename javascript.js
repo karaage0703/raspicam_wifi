@@ -49,9 +49,9 @@ function imageSetup(){
 		var port_mjpeg = 9000;
 		var port_webiopi = 8000;
 		URL_MJPEG = 'http://' + hostname + ':' + port_mjpeg + '/?action=snapshot';
-		URL_SHUTTER = 'http://' + hostname + ':' + port_webiopi + '/rpicam/img/shutter.png';
-		URL_PREVIEW = 'http://' + hostname + ':' + port_webiopi + '/rpicam/photo/';
-		URL_ARROW = 'http://' + hostname + ':' + port_webiopi + '/rpicam/img/arrow.png';
+		URL_SHUTTER = 'http://' + hostname + ':' + port_webiopi + '/raspicam_wifi/img/shutter.png';
+		URL_PREVIEW = 'http://' + hostname + ':' + port_webiopi + '/raspicam_wifi/photo/';
+		URL_ARROW = 'http://' + hostname + ':' + port_webiopi + '/raspicam_wifi/img/arrow.png';
 
 
 		mCanvas = document.getElementById("canvas");
