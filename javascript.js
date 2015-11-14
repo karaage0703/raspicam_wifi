@@ -194,6 +194,7 @@ function ChangeMode(){
 				cameraMode = 0;
 		}
 
+		// Set photo number for preview
 		getData('./photo/camera.set').then(function(data) {
 				photoNumb = data - 1;
 		});
