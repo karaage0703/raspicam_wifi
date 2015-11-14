@@ -15,6 +15,10 @@ function initialize_webiopi(){
 
     webiopi().refreshGPIO(false);
 
+		// for text output
+		getPhotoNumb();
+		setTimeout("txtOutput()", 1000); // wait for get photo number
+	
     imageSetup();
 }
 
@@ -38,11 +42,37 @@ var URL1, URL2;
 var cameraMode = 0; //0:auto 1:preview 2:manual
 var photoNumb = 0;
 
-function imageSetup(){
+function txtOutput(){
+		var tmp_mode;
+		if(cameraMode == 0){
+				tmp_mode = "Auto";
+		}
+		if(cameraMode == 1){
+				tmp_mode = "Preview";
+		}
+		if(cameraMode == 2){
+				tmp_mode = "Manual";
+		}
+		var txt = "Mode:" + tmp_mode + "       " + "PhotoNumb:" + photoNumb;
+
+		document.getElementById("text_out").innerHTML = txt;
+}
+
+function getData(url) {
+  return $.ajax({
+    type: 'get',
+    url: url
+  });
+}
+
+function getPhotoNumb(){
+		// Get photo number for preview
 		getData('./photo/camera.set').then(function(data) {
 				photoNumb = data;
 		});
+}
 
+function imageSetup(){
 		var host = location.host;
 		var hostname = host.split(":")[0];
 
@@ -101,13 +131,6 @@ function imageSetup(){
 		};
 }
 
-function getData(url) {
-  return $.ajax({
-    type: 'get',
-    url: url
-  });
-}
-
 // touch event for smartphone
 function touchEvent(e){
     e.preventDefault();
@@ -133,6 +156,8 @@ function touchEvent(e){
 						photoNumb++;
 				}
 		}
+
+		txtOutput();
 }
 
 // touch end event
@@ -163,6 +188,8 @@ function clickEvent(e){
 						photoNumb++;
 				}
 		}
+		
+		txtOutput();
 }
 
 function applyCustomCss(custom_css){
@@ -194,16 +221,15 @@ function ChangeMode(){
 				cameraMode = 0;
 		}
 
-		// Set photo number for preview
-		getData('./photo/camera.set').then(function(data) {
-				photoNumb = data - 1;
-		});
+		getPhotoNumb();
+		txtOutput();
 }
 
 function ActionShutter(){
     webiopi().callMacro("shutterCamera", [0]);
 
 		setTimeout("imageSetup()", 5000);
+		txtOutput();
 }
 
 function ActionShutdown(){
