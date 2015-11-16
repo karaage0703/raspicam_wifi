@@ -1,25 +1,25 @@
 function initialize_webiopi(){
-    // apply style.css after initialize webiopi
-    applyCustomCss('styles.css');
+		// apply style.css after initialize webiopi
+		applyCustomCss('styles.css');
 
-    // set touch area
-    var touchArea = $("#touchArea")[0];
+		// set touch area
+		var touchArea = $("#touchArea")[0];
 
-    // add touch event listener 
-    touchArea.addEventListener("touchstart", touchEvent, false);
-    touchArea.addEventListener("touchmove", touchEvent, false);
-    touchArea.addEventListener("touchend", touchEndEvent, false);
+		// add touch event listener 
+		touchArea.addEventListener("touchstart", touchEvent, false);
+		touchArea.addEventListener("touchmove", touchEvent, false);
+		touchArea.addEventListener("touchend", touchEndEvent, false);
 
-    // add click event listener
-    touchArea.addEventListener("click", clickEvent, false);
+		// add click event listener
+		touchArea.addEventListener("click", clickEvent, false);
 
-    webiopi().refreshGPIO(false);
+		webiopi().refreshGPIO(false);
 
 		// for text output
 		getPhotoNumb();
 		setTimeout("txtOutput()", 1000); // wait for get photo number
-	
-    imageSetup();
+
+		imageSetup();
 }
 
 var commandID = 0;
@@ -59,10 +59,10 @@ function txtOutput(){
 }
 
 function getData(url) {
-  return $.ajax({
-    type: 'get',
-    url: url
-  });
+		return $.ajax({
+				type: 'get',
+				url: url
+		});
 }
 
 function getPhotoNumb(){
@@ -133,11 +133,11 @@ function imageSetup(){
 
 // touch event for smartphone
 function touchEvent(e){
-    e.preventDefault();
+		e.preventDefault();
 
-    var touch = e.touches[0];  
-    var width = viewScale*document.getElementById("touchArea").offsetWidth;
-    var height = width*3/4;
+		var touch = e.touches[0];  
+		var width = viewScale*document.getElementById("touchArea").offsetWidth;
+		var height = width*3/4;
 
 		if(touch.pageX<width/3){ // left
 				if(cameraMode == 1){
@@ -162,14 +162,14 @@ function touchEvent(e){
 
 // touch end event
 function touchEndEvent(e){
-    e.preventDefault();
+		e.preventDefault();
 
 }
 
 // click event for PC
 function clickEvent(e){
-    var width = viewScale*document.getElementById("touchArea").offsetWidth;
-    var height = width*3/4;
+		var width = viewScale*document.getElementById("touchArea").offsetWidth;
+		var height = width*3/4;
 
 		if(e.pageX<width/3){ // left
 				if(cameraMode == 1){
@@ -188,31 +188,31 @@ function clickEvent(e){
 						photoNumb++;
 				}
 		}
-		
+
 		txtOutput();
 }
 
 function applyCustomCss(custom_css){
-    var head = document.getElementsByTagName('head')[0];
-    var style = document.createElement('link');
-    style.rel = "stylesheet";
-    style.type = 'text/css';
-    style.href = custom_css;
-    head.appendChild(style);
+		var head = document.getElementsByTagName('head')[0];
+		var style = document.createElement('link');
+		style.rel = "stylesheet";
+		style.type = 'text/css';
+		style.href = custom_css;
+		head.appendChild(style);
 }
 
 function getZeroDigit(num,digit) {
-	var n,m,s;
-	if (isNaN(num)) {
-		s = num;
-	} else {
-		s = num.toString();
-	}
-	m = digit - s.length;
-	for (n=0;n<m;n++) {
-		s = "0" + s;
-	}
-	return s;
+		var n,m,s;
+		if (isNaN(num)) {
+				s = num;
+		} else {
+				s = num.toString();
+		}
+		m = digit - s.length;
+		for (n=0;n<m;n++) {
+				s = "0" + s;
+		}
+		return s;
 }
 
 function ChangeMode(){
@@ -226,12 +226,12 @@ function ChangeMode(){
 }
 
 function ActionShutter(){
-    webiopi().callMacro("shutterCamera", [0]);
+		webiopi().callMacro("shutterCamera", [0]);
 
 		setTimeout("imageSetup()", 5000);
 		txtOutput();
 }
 
 function ActionShutdown(){
-    webiopi().callMacro("shutdownCamera", [0]);
+		webiopi().callMacro("shutdownCamera", [0]);
 }
