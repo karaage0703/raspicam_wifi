@@ -8,3 +8,4 @@ Please check for my website(Japanese only)
 
 http://karaage.hatenadiary.jp/entry/2015/11/20/073000
 
+This software is released under the MIT License, see LICENSE.
