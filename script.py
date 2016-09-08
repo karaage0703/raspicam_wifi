@@ -1,7 +1,6 @@
 # -*- coding: utf-8 -*-
 import webiopi
 import time
-import wiringpi2 as wiringpi
 import os
 
 from time import sleep
